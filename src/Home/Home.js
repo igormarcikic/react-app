@@ -13,6 +13,9 @@ const Home = () => {
   const [bodyState, setBodyState] = useState({body: null})
   const [authorState, setAuthorState] = useState({author: null})
 
+  // Helper variables for handling UI until state is loaded
+  const [isLoading, setIsLoading] = useState(false);
+
    // Fetch notes from JSON file and use as initial state
    useEffect( () => {
     const fetchData = async () => {
@@ -28,9 +31,6 @@ const Home = () => {
     }
     fetchData()
   }, [])
-
-  // Helper variables for handling UI until state is loaded
-  const [isLoading, setIsLoading] = useState(false);
 
   // Method for authenticating modal data before submitting
   const authenticateModalHandler = (event) => {
@@ -139,7 +139,7 @@ const Home = () => {
     const filtered = notesState.notes.sort((a, b) => {
       let aa = a.date.split('/').reverse().join()
       let bb = b.date.split('/').reverse().join()
-      return aa > bb ? -1 : (aa > bb ? 1 : 0)
+      return aa > bb ? -1 : 0
     });
       setNotesState({
         notes: filtered
